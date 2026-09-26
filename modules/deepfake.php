@@ -10,7 +10,6 @@ foreach ($scenarios as $s) { $by_id[$s['id']] = $s; }
 
 $flash = '';
 
-// Handle response submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (!verify_csrf($_POST['csrf_token'] ?? '')) {
         $flash = 'Session expired, please try again.';
@@ -55,7 +54,6 @@ include __DIR__ . '/../includes/header.php';
 <?php if ($flash): ?><div class="alert alert-error"><?= e($flash) ?></div><?php endif; ?>
 
 <div class="grid grid-2" style="gap:24px; align-items:start;">
-    <!-- Scenarios navigation -->
     <div class="flex flex-col gap-12">
         <?php foreach ($scenarios as $s):
             $att = get_attempt($user['id'], 'deepfake', $s['id']);
@@ -79,7 +77,6 @@ include __DIR__ . '/../includes/header.php';
         <?php endforeach; ?>
     </div>
 
-    <!-- Active Scenario Deep Dive -->
     <div class="card card-pad">
         <div class="flex-between mb-16 pb-12" style="border-bottom:1px solid var(--border);">
             <div>
@@ -92,7 +89,6 @@ include __DIR__ . '/../includes/header.php';
             </span>
         </div>
 
-        <!-- Simulated Audio/Video Monitor -->
         <div class="feed-monitor mb-16">
             <div class="feed-monitor-header">
                 <span>🎙️ Intercepted Media / Video Feed Stream</span>
@@ -101,7 +97,6 @@ include __DIR__ . '/../includes/header.php';
             <p class="feed-monitor-body"><?= e($selected['audio_transcript']) ?></p>
         </div>
 
-        <!-- Media Indicators Observed -->
         <div class="card card-pad mb-16" style="background:var(--bg); border:1px solid var(--border);">
             <div class="text-xs font-bold text-muted mb-8 uppercase">Sensory Indicators & Behavioral Cues:</div>
             <ul style="padding-left:18px; margin:0; font-size:13px; line-height:1.6;">
@@ -111,7 +106,6 @@ include __DIR__ . '/../includes/header.php';
             </ul>
         </div>
 
-        <!-- Decision or Post-attempt Feedback -->
         <?php if ($selected_attempt): ?>
             <div class="verdict-panel">
                 <div class="flex gap-8 mb-12" style="align-items:center;">
