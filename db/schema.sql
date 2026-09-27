@@ -64,3 +64,16 @@ CREATE TABLE IF NOT EXISTS forensic_logs (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+-- ============ SAMPLE DEMO SEEDS (FOR IMMEDIATE VERIFICATION TESTING) ============
+INSERT INTO users (id, name, email, password_hash, role, cyber_score, streak_count) 
+VALUES (1, 'Rehan Khan', 'rehan.khan@safesphere.org', '$2y$10$wW1lZ5bYVnJ29l3m1pX6.ez4f8Wb9jVl8V1e5u1o0u1e5u1o0u1e5', 'user', 88, 5)
+ON DUPLICATE KEY UPDATE cyber_score = 88;
+
+INSERT INTO certificates (user_id, cert_key, title, credential_id, issue_date) 
+VALUES 
+(1, 'phishing_specialist', 'Phishing & Domain Spoofing Defense Specialist', 'SS-A8E2B1C9F4', '2026-09-15'),
+(1, 'upi_guardian', 'UPI Collect-Request & Reverse-Payment Defender', 'SS-7F3D9A1C5E', '2026-09-19'),
+(1, 'cyber_champion', 'National Cyber Resilience & Defense Champion', 'SS-CHAMP2026X', '2026-09-25')
+ON DUPLICATE KEY UPDATE id=id;
+

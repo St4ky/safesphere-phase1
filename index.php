@@ -21,7 +21,7 @@ $nav_active = 'home';
 <meta name="description" content="Simulate real Indian cyber fraud attacks: UPI scams, Digital Arrest extortion, phishing links, and social engineering in a secure interactive sandbox.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.5">
+<link rel="stylesheet" href="assets/css/style.css?v=2.7">
 </head>
 <body>
 
