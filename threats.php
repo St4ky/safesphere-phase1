@@ -211,6 +211,60 @@
     </div>
 </section>
 
+<!-- Threat 5: OTP / SIM Swap -->
+<section class="info-section">
+    <div class="container">
+        <div class="grid grid-2" style="gap:48px;align-items:start;">
+            <div>
+                <span class="badge badge-indigo mb-12">Threat #5</span>
+                <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;">📲 OTP Hijacking & SIM-Swap</h2>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;">
+                    Cybercriminals use social engineering to trick you into sharing your OTP, or they bypass you entirely by cloning or swapping your SIM card through your mobile operator.
+                </p>
+                <h4 style="margin-bottom:10px;">Common Tactics:</h4>
+                <ul style="list-style:disc;padding-left:18px;color:var(--text-muted);font-size:14.5px;line-height:2;">
+                    <li>Call forwarding scams ("Dial *401*... to activate 5G")</li>
+                    <li>WhatsApp account takeovers via 6-digit verification code requests</li>
+                    <li>SIM swap attacks resulting in all banking SMS OTPs being routed to attackers</li>
+                </ul>
+            </div>
+            <div class="card card-pad" style="background:var(--indigo-light);border-left:4px solid var(--indigo);">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--indigo);margin-bottom:12px;">The Defense</div>
+                <p style="font-size:14px;line-height:1.8;color:var(--text);">
+                    Never dial MMI codes (like *401*) suggested by unknown callers. If your phone suddenly loses cellular service in a location with normally good coverage, contact your carrier immediately — it may be a SIM swap in progress.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Threat 6: Deepfakes -->
+<section class="info-section" style="background:var(--surface);">
+    <div class="container">
+        <div class="grid grid-2" style="gap:48px;align-items:start;">
+            <div class="card card-pad" style="background:var(--red-light);border-left:4px solid var(--red);">
+                <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--red);margin-bottom:12px;">Visual & Audio Clues</div>
+                <p style="font-size:14px;line-height:1.8;color:var(--text);">
+                    Look for unnatural blinking, mismatched lip-sync, and robotic or emotionally flat intonations in voice clones. AI models struggle with complex lighting and background textures. Always establish a safe word with family members.
+                </p>
+            </div>
+            <div>
+                <span class="badge badge-red mb-12">Threat #6</span>
+                <h2 style="font-size:28px;font-weight:800;letter-spacing:-0.02em;margin-bottom:14px;">🤖 Deepfakes & AI Voice Clones</h2>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:14px;">
+                    Threat actors use advanced AI tools to clone the voices of family members or executives. This technology is increasingly used in "virtual kidnapping" and CEO fraud.
+                </p>
+                <h4 style="margin-bottom:10px;">Common AI Scams:</h4>
+                <ul style="list-style:disc;padding-left:18px;color:var(--text-muted);font-size:14.5px;line-height:2;">
+                    <li>Virtual kidnapping: "We have your child, send ransom" using cloned audio</li>
+                    <li>CEO fraud: Fabricated video calls directing finance teams to wire funds</li>
+                    <li>Synthetic media for fake investment endorsements</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- What to do -->
 <section class="info-section">
     <div class="container">
