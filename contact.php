@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Contact SafeSphere · Support & Inquiries</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.7">
+<link rel="stylesheet" href="assets/css/style.css?v=2.8">
 <script>try{var t=localStorage.getItem('ss_theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
@@ -82,6 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js?v=2.6"></script>
+<script src="assets/js/main.js?v=2.8"></script>
 </body>
 </html>

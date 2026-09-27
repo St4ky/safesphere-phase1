@@ -8,7 +8,7 @@
 <meta name="description" content="SafeSphere is India's hands-on cybersecurity awareness platform — built to help everyday internet users recognize phishing, UPI fraud, social engineering, and network threats through realistic simulations.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.7">
+<link rel="stylesheet" href="assets/css/style.css?v=2.8">
 </head>
 <body>
 <?php $nav_active = 'about'; include __DIR__ . '/includes/public_nav.php'; ?>
@@ -152,6 +152,6 @@
 </section>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js?v=2.6"></script>
+<script src="assets/js/main.js?v=2.8"></script>
 </body>
 </html>
