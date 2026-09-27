@@ -74,15 +74,15 @@ $nav_active = 'home';
             </div>
 
             <div class="scanner-tabs">
-                <button type="button" class="scanner-tab active" onclick="setScannerPreset('url')">
+                <button type="button" class="scanner-tab active" onclick="setScannerPreset('url', this)">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
                     <span>Suspicious Link / Domain</span>
                 </button>
-                <button type="button" class="scanner-tab" onclick="setScannerPreset('sms')">
+                <button type="button" class="scanner-tab" onclick="setScannerPreset('sms', this)">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                     <span>Electricity / Job SMS Text</span>
                 </button>
-                <button type="button" class="scanner-tab" onclick="setScannerPreset('upi')">
+                <button type="button" class="scanner-tab" onclick="setScannerPreset('upi', this)">
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
                     <span>UPI Virtual Address (VPA)</span>
                 </button>
@@ -319,9 +319,9 @@ $nav_active = 'home';
 </section>
 
 <script>
-function setScannerPreset(type) {
+function setScannerPreset(type, el) {
     document.querySelectorAll('.scanner-tab').forEach(t => t.classList.remove('active'));
-    event.currentTarget.classList.add('active');
+    if (el) el.classList.add('active');
     const input = document.getElementById('quick-scanner-input');
     if (type === 'url') {
         input.value = 'sbi-kyc-update.xyz';
@@ -337,6 +337,6 @@ function setScannerPreset(type) {
 </script>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2.6"></script>
 </body>
 </html>

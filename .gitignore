@@ -1,0 +1,26 @@
+# ── Sensitive configuration ──────────────────────────────────────────────────
+# Copy config/db.example.php → config/db.php and fill in your credentials.
+config/db.php
+
+# ── OS / IDE junk ────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# ── PHP / Composer ───────────────────────────────────────────────────────────
+vendor/
+composer.lock
+
+# ── Log files ────────────────────────────────────────────────────────────────
+*.log
+error_log
+
+# ── User-uploaded files (if any) ─────────────────────────────────────────────
+uploads/
+
+# ── XAMPP / Apache temp files ────────────────────────────────────────────────
+.htaccess.bak

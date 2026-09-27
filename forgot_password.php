@@ -73,6 +73,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-sm text-center mt-16"><a href="login.php" style="color:var(--indigo);font-weight:700;">Return to Log In</a></p>
     </div>
 </div>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2.6"></script>
 </body>
 </html>

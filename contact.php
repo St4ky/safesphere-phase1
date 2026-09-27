@@ -82,6 +82,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2.6"></script>
 </body>
 </html>

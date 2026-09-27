@@ -87,6 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-sm text-center mt-8"><a href="index.php" style="color:var(--text-muted);">← Back to home</a></p>
     </div>
 </div>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/main.js?v=2.6"></script>
 </body>
 </html>

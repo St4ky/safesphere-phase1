@@ -281,6 +281,9 @@ document.addEventListener('DOMContentLoaded', function () {
             document.querySelectorAll('.upi-detail').forEach(function (d) { d.classList.add('hidden'); });
             const detail = document.getElementById('upi-detail-' + id);
             if (detail) detail.classList.remove('hidden');
+        });
+    });
+
     // ── Live Threat & Scam Sandbox Engine ─────────────────────────────
     const quickScanForm = document.getElementById('quick-scanner-form');
     const quickScanInput = document.getElementById('quick-scanner-input');
