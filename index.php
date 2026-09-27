@@ -124,62 +124,78 @@ $nav_active = 'home';
     </div>
 </div>
 
-<!-- 6 CORE SIMULATION LABS -->
+<!-- 8 CORE SIMULATION LABS -->
 <section class="section" style="background:var(--bg);">
     <div class="container">
         <div class="section-header">
             <span class="badge badge-indigo mb-8">Simulation Curriculum</span>
-            <h2>Six Defensive Labs Engineered for Indian Threats</h2>
+            <h2>8 Specialized Cyber Defense Modules</h2>
             <p>Every scenario is reverse-engineered from real incidents documented by Indian cybersecurity authorities, RBI advisories, and CERT-In bulletins.</p>
         </div>
-        <div class="grid grid-3" style="gap:20px;">
+        <div class="grid grid-4" style="gap:20px;">
             <div class="feature-card">
                 <div class="feature-icon" style="background:rgba(37,99,235,0.1);color:var(--indigo);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
                 </div>
-                <h3>Phishing & Lookalike Domains</h3>
-                <p>Inspect realistic Indian mail streams: fake SBI KYC suspensions, IRCTC refund traps, and Income Tax Department demands. Learn to identify header spoofs and domain typo-squats.</p>
+                <h3>Email Phishing & Domain Spoofing</h3>
+                <p>Inspect realistic Indian mail streams: fake SBI KYC suspensions, IRCTC refund traps, and Income Tax Department demands. Learn to identify header spoofs, SPF/DKIM/DMARC failures, homoglyph domains, and lookalike TLDs.</p>
                 <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">9 Scenarios · Live Header Analysis · Scored</div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background:rgba(16,185,129,0.1);color:var(--green);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
                 </div>
-                <h3>UPI & Payment Gateway Fraud</h3>
-                <p>Interactive simulations of PhonePe, GPay, and Paytm collect requests. Master the golden rule: entering your UPI PIN always DEBITS funds from your account, never credits it.</p>
+                <h3>UPI Collect-Request & Reverse-Payment Fraud</h3>
+                <p>Interactive simulations of PhonePe, GPay, and Paytm collect requests. Master collect inversion, QR scams, MPIN risks, and the golden rule: entering your UPI PIN always DEBITS funds from your account.</p>
                 <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">6 Scenarios · QR Reverse Scams · PIN Safety</div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background:rgba(245,158,11,0.1);color:var(--amber);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
                 </div>
-                <h3>Social Engineering & Conversational Scams</h3>
-                <p>Dynamic branching dialogues with simulated scammers on WhatsApp and Telegram. Encounter fake HR recruiters, courier customs traps, and tech support takeovers.</p>
+                <h3>Social Engineering & Vishing Resistance</h3>
+                <p>Dynamic branching dialogues with simulated scammers on WhatsApp and Telegram. Encounter AI-scripted vishing, courier fraud, digital arrest calls, fake HR recruiters, and tech support takeovers.</p>
                 <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">Interactive Chat Engine · Branching Decisions</div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background:rgba(59,130,246,0.1);color:var(--blue);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
                 </div>
-                <h3>Network & Wireless Perimeter Audit</h3>
-                <p>Evaluate your home and office router defenses: WPA3 encryption protocols, remote admin ports, UPnP exposures, DNS leaks, and public Wi-Fi rogue access points.</p>
+                <h3>Network Hardening & Self-Audit Protocol</h3>
+                <p>Evaluate your home and office router defenses: WPA3 encryption protocols, remote admin ports, UPnP exposures, DNS leaks, router exploits, and public Wi-Fi attacks.</p>
                 <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">7 Audit Points · Live IP Assessment · Remediation Guides</div>
             </div>
             <div class="feature-card">
-                <div class="feature-icon" style="background:rgba(147,51,234,0.1);color:#9333ea;">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                <div class="feature-icon" style="background:rgba(124,58,237,0.1);color:#7c3aed;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
                 </div>
-                <h3>Forensic Investigation Toolkit</h3>
-                <p>Equipped with live security APIs: verify domain DNS/SPF/MX integrity via Cloudflare DoH, test password exposure against HaveIBeenPwned breaches, and trace sender IPs.</p>
-                <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">Live Cloudflare DoH · HIBP Breach API · IP Intel</div>
+                <h3>OTP Hijacking & SIM-Swap Defense</h3>
+                <p>Master the mechanics of OTP social engineering — vishing calls posing as bank officials, WhatsApp account takeover via 6-digit code sharing, and SIM swap attacks that route all your banking SMS OTPs to attackers.</p>
+                <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">5 Scenarios · SIM Swap · Vishing Call Defense</div>
             </div>
             <div class="feature-card">
                 <div class="feature-icon" style="background:rgba(239,68,68,0.1);color:var(--red);">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
                 </div>
-                <h3>Deepfake & AI Synthetic Identity</h3>
-                <p>Recognize AI-cloned executive voices, manipulated video calls, and synthetic face artifacts utilized in modern CEO fraud and virtual kidnapping extortion.</p>
+                <h3>Deepfake & AI Voice-Clone Recognition</h3>
+                <p>Recognize AI-cloned executive voices, manipulated video calls, and synthetic face artifacts utilized in modern CEO fraud, executive impersonation, and virtual kidnapping extortion.</p>
                 <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">AI Voice Analysis · Visual Artifact Spotting</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background:rgba(147,51,234,0.1);color:#9333ea;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <h3>Forensic Inspection & Password Entropy</h3>
+                <p>Equipped with live security APIs: verify domain DNS/SPF/MX integrity via Cloudflare DoH, test password exposure against HaveIBeenPwned breaches, trace sender IPs, and perform APK permission analysis.</p>
+                <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">Live Cloudflare DoH · HIBP Breach API · IP Intel</div>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon" style="background:rgba(16,185,129,0.1);color:var(--green);">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <h3>Tamper-Evident Credential Verification</h3>
+                <p>SafeSphere certificates embed cryptographically unique 10-character hex credential IDs. Any third party can verify authenticity on the public attestation portal — no central database required.</p>
+                <div class="mt-16 text-xs text-muted" style="border-top:1px solid var(--border);padding-top:12px;">6 Certificates · Public Verify Portal · PDF Export</div>
             </div>
         </div>
     </div>

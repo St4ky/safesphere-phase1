@@ -54,7 +54,7 @@
     <div class="container">
         <div class="section-header">
             <h2>The Training Modules</h2>
-            <p>Four modules, each targeting a different attack vector. Together they cover the full spectrum of threats Indian internet users face.</p>
+            <p>8 specialized modules, each targeting a different attack vector. Together they cover the full spectrum of threats Indian internet users face.</p>
         </div>
 
         <!-- Module 1: Phishing -->
@@ -220,6 +220,93 @@
             </div>
         </div>
     </div>
+        <!-- Module 5: OTP -->
+        <div class="grid grid-2" style="gap:40px;align-items:center;margin-top:56px;margin-bottom:56px;">
+            <div>
+                <div class="feature-icon" style="background:rgba(124,58,237,0.1);color:#7c3aed;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <h3 style="font-size:24px;font-weight:800;margin-bottom:12px;">Module 5: Multi-Factor Authentication (OTP) Hijacking & SIM-Swap Countermeasures</h3>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+                    Master the mechanics of OTP social engineering. Encounter simulations of vishing calls posing as bank officials and SIM swap attacks that route all your banking SMS OTPs to attackers.
+                </p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="badge badge-indigo">5 Scenarios</span>
+                    <span class="badge badge-gray">SIM Swap</span>
+                    <span class="badge badge-amber">Vishing Call Defense</span>
+                </div>
+            </div>
+            <div class="card card-pad">
+                <div style="font-size:14px;font-weight:700;margin-bottom:14px;">📱 OTP Hijacking Defense</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Learn to recognize the signs of a compromised phone number and how to safely respond to unprompted OTP requests.</p>
+            </div>
+        </div>
+
+        <!-- Module 6: Deepfake -->
+        <div class="grid grid-2" style="gap:40px;align-items:center;margin-bottom:56px;">
+            <div class="card card-pad" style="background:#1e1e1e;color:white;border-color:#333;">
+                <div style="font-size:14px;font-weight:700;margin-bottom:14px;color:#ef4444;">🎙️ AI Voice Clone Alert</div>
+                <p style="font-size:13px;color:#94a3b8;line-height:1.6;">Detecting unnatural pauses, robotic inflections, and emotional urgency in simulated executive deepfake audio.</p>
+            </div>
+            <div>
+                <div class="feature-icon" style="background:rgba(239,68,68,0.1);color:var(--red);width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
+                </div>
+                <h3 style="font-size:24px;font-weight:800;margin-bottom:12px;">Module 6: Synthetic Media (Deepfake) & AI Voice-Clone Threat Recognition</h3>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+                    Recognize AI-cloned executive voices, manipulated video calls, and synthetic face artifacts utilized in modern CEO fraud, executive impersonation, and virtual kidnapping extortion.
+                </p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="badge badge-red">AI Voice Analysis</span>
+                    <span class="badge badge-gray">Visual Artifact Spotting</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module 7: Forensic -->
+        <div class="grid grid-2" style="gap:40px;align-items:center;margin-bottom:56px;">
+            <div>
+                <div class="feature-icon" style="background:rgba(147,51,234,0.1);color:#9333ea;width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                </div>
+                <h3 style="font-size:24px;font-weight:800;margin-bottom:12px;">Module 7: Rule-Based Client-Side Forensic Inspection & Password Entropy Analysis</h3>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+                    Equipped with live security APIs: verify domain DNS/SPF/MX integrity via Cloudflare DoH, test password exposure against HaveIBeenPwned breaches, trace sender IPs, and perform APK permission analysis.
+                </p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="badge badge-indigo">Live Cloudflare DoH</span>
+                    <span class="badge badge-gray">HIBP Breach API</span>
+                    <span class="badge badge-green">IP Intel</span>
+                </div>
+            </div>
+            <div class="card card-pad">
+                <div style="font-size:14px;font-weight:700;margin-bottom:14px;">🔍 Live Inspection</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Use the built-in forensic tools to actively dissect malicious URLs, email headers, and app permissions in real-time.</p>
+            </div>
+        </div>
+
+        <!-- Module 8: Credential -->
+        <div class="grid grid-2" style="gap:40px;align-items:center;">
+            <div class="card card-pad" style="background:var(--green-light);border-color:var(--green);">
+                <div style="font-size:14px;font-weight:700;margin-bottom:14px;color:var(--green);">✅ Verified Attestation</div>
+                <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Your training results are permanently secured. Generate a unique ID to prove your completion status to employers.</p>
+            </div>
+            <div>
+                <div class="feature-icon" style="background:rgba(16,185,129,0.1);color:var(--green);width:56px;height:56px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:16px;">
+                    <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+                </div>
+                <h3 style="font-size:24px;font-weight:800;margin-bottom:12px;">Module 8: Tamper-Evident Credential Architecture & Public Attestation Verification</h3>
+                <p style="font-size:15px;color:var(--text-muted);line-height:1.7;margin-bottom:16px;">
+                    SafeSphere certificates embed cryptographically unique 10-character hex credential IDs. Any third party can verify authenticity on the public attestation portal — no central database required.
+                </p>
+                <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                    <span class="badge badge-green">6 Certificates</span>
+                    <span class="badge badge-gray">Public Verify Portal</span>
+                    <span class="badge badge-indigo">PDF Export</span>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <!-- Scoring + Certificates -->
@@ -257,7 +344,7 @@
         </div>
         <div style="max-width:780px;margin:0 auto;">
             <?php $faqs = [
-                ['Is SafeSphere really free?', 'Yes — completely free for individual users. All four training modules, the Forensic Toolkit, Reports, and Certificates are free. We don\'t sell your data or show ads. Our mission is cybersecurity awareness at scale, not revenue.'],
+                ['Is SafeSphere really free?', 'Yes — completely free for individual users. All 8 training modules, the Forensic Toolkit, Reports, and Certificates are free. We don\'t sell your data or show ads. Our mission is cybersecurity awareness at scale, not revenue.'],
                 ['Do I need any technical knowledge?', 'No. SafeSphere is built for everyday internet users — not IT professionals. If you use UPI apps, Gmail, or WhatsApp, you have all the background you need. The explanations are written in plain language.'],
                 ['Can I retake scenarios?', 'Yes — you can replay any scenario, but your score is recorded only on your first attempt. Replaying is great for review without pressure.'],
                 ['Are the scenarios based on real attacks?', 'Yes. Every scenario in SafeSphere is derived from documented Indian cybercrime cases, phishing campaigns targeting Indian banks, and fraud patterns reported by NPCI, CERT-In, and RBI.'],

@@ -12,37 +12,37 @@ if (!empty($_SESSION['just_registered'])) {
 
 $modules = [
     'phishing'  => [
-        'label' => 'Phishing Defense',
+        'label' => 'Phishing & Domain Spoofing',
         'svg'   => '<path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path>',
         'total' => 9,
         'url'   => 'modules/phishing.php'
     ],
     'upi'       => [
-        'label' => 'UPI Fraud Sim',
+        'label' => 'UPI Fraud & Payment Scams',
         'svg'   => '<rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path>',
         'total' => 6,
         'url'   => 'modules/upi.php'
     ],
     'socialeng' => [
-        'label' => 'Social Engineering',
+        'label' => 'Social Engineering & Vishing',
         'svg'   => '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>',
         'total' => 4,
         'url'   => 'modules/socialeng.php'
     ],
     'network'   => [
-        'label' => 'Network Self-Audit',
+        'label' => 'Network Hardening & Audit',
         'svg'   => '<path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line>',
         'total' => 7,
         'url'   => 'modules/network.php'
     ],
     'otp'       => [
-        'label' => 'OTP & Voice Defense',
+        'label' => 'OTP Hijacking & SIM-Swap',
         'svg'   => '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>',
         'total' => 5,
         'url'   => 'modules/otp.php'
     ],
     'deepfake'  => [
-        'label' => 'Deepfake & AI Fraud',
+        'label' => 'Deepfake & AI Voice Clone',
         'svg'   => '<rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path>',
         'total' => 4,
         'url'   => 'modules/deepfake.php'
@@ -164,14 +164,14 @@ include __DIR__ . '/includes/header.php';
         <span class="badge badge-red" style="font-size:11px;">CERT-In Verified</span>
     </div>
     
-    <div class="grid grid-3" style="gap:16px;">
+    <div class="grid grid-2" style="gap:16px;">
         <div class="card card-pad" style="background:var(--bg); border-left:4px solid var(--red);">
             <div class="flex-between mb-6">
                 <span class="badge badge-red" style="font-size:10px;">Critical Advisory</span>
                 <span class="text-xs text-muted">MHA I4C</span>
             </div>
             <div class="font-bold text-sm mb-6">Digital Arrest Video Intimidation</div>
-            <p class="text-xs text-muted" style="line-height:1.55;">Fraudsters pose as CBI / Cyber Cell on Skype demanding immediate fund transfers to avoid arrest. Digital arrest does not exist under Indian law.</p>
+            <p class="text-xs text-muted" style="line-height:1.55;">Fraudsters pose as CBI / Cyber Cell on Skype demanding fund transfers to avoid arrest. Digital arrest does not exist under Indian law.</p>
         </div>
 
         <div class="card card-pad" style="background:var(--bg); border-left:4px solid var(--amber);">
@@ -180,7 +180,7 @@ include __DIR__ . '/includes/header.php';
                 <span class="text-xs text-muted">CERT-In Bulletin</span>
             </div>
             <div class="font-bold text-sm mb-6">Predatory APK Sideloading</div>
-            <p class="text-xs text-muted" style="line-height:1.55;">SMS/WhatsApp messages posing as courier tracking or power bills downloading malware to silently intercept 2FA banking SMS OTPs.</p>
+            <p class="text-xs text-muted" style="line-height:1.55;">SMS/WhatsApp posing as courier or power bills download malware silently intercepting 2FA banking OTPs via READ_SMS + INTERNET permissions.</p>
         </div>
 
         <div class="card card-pad" style="background:var(--bg); border-left:4px solid var(--blue);">
@@ -189,7 +189,34 @@ include __DIR__ . '/includes/header.php';
                 <span class="text-xs text-muted">NPCI Safety</span>
             </div>
             <div class="font-bold text-sm mb-6">UPI Collect Inversion Scam</div>
-            <p class="text-xs text-muted" style="line-height:1.55;">Scammers claim you will "receive cashback" or "confirm refunds" by typing your MPIN. Entering your UPI PIN always debits money.</p>
+            <p class="text-xs text-muted" style="line-height:1.55;">Scammers claim you will "receive cashback" by typing your MPIN. Entering your UPI PIN ALWAYS debits money — it can never credit your account.</p>
+        </div>
+
+        <div class="card card-pad" style="background:var(--bg); border-left:4px solid #7c3aed;">
+            <div class="flex-between mb-6">
+                <span class="badge" style="font-size:10px;background:rgba(124,58,237,0.1);color:#7c3aed;border:1px solid rgba(124,58,237,0.3);">SIM-Swap Alert</span>
+                <span class="text-xs text-muted">TRAI Advisory</span>
+            </div>
+            <div class="font-bold text-sm mb-6">Telecom SIM Hijacking Wave</div>
+            <p class="text-xs text-muted" style="line-height:1.55;">Scammers call posing as Jio/Airtel, trick users into texting SIM serial numbers to short codes. Once swapped, all banking OTPs route to attacker.</p>
+        </div>
+
+        <div class="card card-pad" style="background:var(--bg); border-left:4px solid var(--red);">
+            <div class="flex-between mb-6">
+                <span class="badge badge-red" style="font-size:10px;">AI Threat</span>
+                <span class="text-xs text-muted">CERT-In 2024</span>
+            </div>
+            <div class="font-bold text-sm mb-6">AI Voice Clone Extortion</div>
+            <p class="text-xs text-muted" style="line-height:1.55;">ElevenLabs-style voice cloning uses 3-second Instagram audio samples to simulate family members pleading for emergency fund transfers.</p>
+        </div>
+
+        <div class="card card-pad" style="background:var(--bg); border-left:4px solid var(--green);">
+            <div class="flex-between mb-6">
+                <span class="badge badge-green" style="font-size:10px;">Forensic Tool</span>
+                <span class="text-xs text-muted">RBI Guideline</span>
+            </div>
+            <div class="font-bold text-sm mb-6">SPF/DKIM Domain Spoofing</div>
+            <p class="text-xs text-muted" style="line-height:1.55;">Phishing emails from fake domains pass spam filters when SPF records are absent. Always verify sender domain against brand official domains before clicking.</p>
         </div>
     </div>
 </div>

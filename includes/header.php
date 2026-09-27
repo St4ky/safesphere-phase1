@@ -13,7 +13,7 @@ $base = $base ?? '';
 <script>try{var t=localStorage.getItem('ss_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= $base ?>assets/css/style.css?v=2.5">
+<link rel="stylesheet" href="<?= $base ?>assets/css/style.css?v=2.6">
 </head>
 <body>
 <!-- Mobile sidebar overlay backdrop -->
@@ -43,27 +43,27 @@ $base = $base ?? '';
         <div class="nav-section-label">Defensive Labs</div>
         <a href="<?= $base ?>modules/phishing.php" class="nav-item <?= ($active ?? '') === 'phishing' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="m22 2-7 20-4-9-9-4Z"></path><path d="M22 2 11 13"></path></svg>
-            <span>Phishing Defense</span>
+            <span>Phishing &amp; Domain Spoofing</span>
         </a>
         <a href="<?= $base ?>modules/upi.php" class="nav-item <?= ($active ?? '') === 'upi' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"></rect><path d="M12 18h.01"></path></svg>
-            <span>UPI Fraud Simulator</span>
+            <span>UPI Fraud &amp; Payment Scams</span>
         </a>
         <a href="<?= $base ?>modules/socialeng.php" class="nav-item <?= ($active ?? '') === 'socialeng' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
-            <span>Social Engineering</span>
+            <span>Social Engineering &amp; Vishing</span>
         </a>
         <a href="<?= $base ?>modules/network.php" class="nav-item <?= ($active ?? '') === 'network' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M5 12.55a11 11 0 0 1 14.08 0"></path><path d="M1.42 9a16 16 0 0 1 21.16 0"></path><path d="M8.53 16.11a6 6 0 0 1 6.95 0"></path><line x1="12" y1="20" x2="12.01" y2="20"></line></svg>
-            <span>Network Self-Audit</span>
+            <span>Network Hardening &amp; Audit</span>
         </a>
         <a href="<?= $base ?>modules/otp.php" class="nav-item <?= ($active ?? '') === 'otp' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
-            <span>OTP & Voice Defense</span>
+            <span>OTP Hijacking &amp; SIM-Swap</span>
         </a>
         <a href="<?= $base ?>modules/deepfake.php" class="nav-item <?= ($active ?? '') === 'deepfake' ? 'active' : '' ?>">
             <svg class="icon-svg" viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="3" rx="2"></rect><circle cx="9" cy="9" r="2"></circle><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"></path></svg>
-            <span>Deepfake & AI Fraud</span>
+            <span>Deepfake &amp; AI Voice Clone</span>
         </a>
 
         <div class="nav-section-label">Intelligence Tools</div>

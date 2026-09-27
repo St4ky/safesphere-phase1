@@ -119,6 +119,8 @@
                 ['them' => 'No feedback on wrong answers', 'us' => 'Instant red-flag breakdown explaining every decision'],
                 ['them' => 'No UPI-specific fraud training', 'us' => 'Dedicated UPI collect request simulator — collect vs. pay'],
                 ['them' => 'Social engineering = reading a PDF', 'us' => 'Branching chat scenarios — your choices change the outcome'],
+                ['them' => 'No OTP or SIM-Swap defenses', 'us' => 'OTP Hijacking & SIM-Swap Countermeasures module'],
+                ['them' => 'Paper certificates easily forged', 'us' => 'Tamper-Evident Credential Architecture & Public Attestation Verification'],
             ];
             foreach ($comparisons as $c):
             ?>

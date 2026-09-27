@@ -9,6 +9,8 @@ function check_all_certs($user_id, $pdo): array {
     $s_ph = get_module_stats($user_id, 'phishing');
     $s_up = get_module_stats($user_id, 'upi');
     $s_se = get_module_stats($user_id, 'socialeng');
+    $s_ot = get_module_stats($user_id, 'otp');
+    $s_df = get_module_stats($user_id, 'deepfake');
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM audit_results WHERE user_id=? AND status='pass'");
     $stmt->execute([$user_id]);
     $netPass = (int)$stmt->fetchColumn();
@@ -17,6 +19,8 @@ function check_all_certs($user_id, $pdo): array {
         'upi_guardian'        => ['ok' => $s_up['attempted'] >= 6 && $s_up['correct'] >= 5, 'progress' => $s_up['correct'], 'total' => 5, 'pct' => min(100, round($s_up['correct']/5*100))],
         'social_eng_proof'    => ['ok' => $s_se['attempted'] >= 4 && $s_se['correct'] >= 3, 'progress' => $s_se['correct'], 'total' => 3, 'pct' => min(100, round($s_se['correct']/3*100))],
         'network_defender'    => ['ok' => $netPass >= 7, 'progress' => $netPass, 'total' => 7, 'pct' => min(100, round($netPass/7*100))],
+        'otp_defender'        => ['ok' => $s_ot['attempted'] >= 5 && $s_ot['correct'] >= 4, 'progress' => $s_ot['correct'], 'total' => 4, 'pct' => min(100, round($s_ot['correct']/4*100))],
+        'deepfake_analyst'    => ['ok' => $s_df['attempted'] >= 4 && $s_df['correct'] >= 3, 'progress' => $s_df['correct'], 'total' => 3, 'pct' => min(100, round($s_df['correct']/3*100))],
     ];
 }
 
@@ -65,14 +69,34 @@ $cert_defs = [
         'skills'   => ['Router password hardening', 'WPA3 encryption', 'Network segmentation', 'Firmware management', 'UPnP/remote management'],
     ],
     [
+        'key'      => 'otp_defender',
+        'title'    => 'OTP & SIM-Swap Defender',
+        'medal'    => '📱',
+        'color'    => '#7c3aed',
+        'color_bg' => '#f5f3ff',
+        'desc'     => 'Successfully identified OTP hijacking attempts, SIM-swap attacks, and vishing calls across 5 scenarios with ≥4 correct decisions.',
+        'criteria' => 'Complete 5 OTP scenarios with ≥4 correct',
+        'skills'   => ['OTP social engineering resistance', 'SIM-swap attack recognition', 'Vishing call defense', 'Telecom fraud awareness'],
+    ],
+    [
+        'key'      => 'deepfake_analyst',
+        'title'    => 'Synthetic Media Analyst',
+        'medal'    => '🤖',
+        'color'    => '#dc2626',
+        'color_bg' => '#fef2f2',
+        'desc'     => 'Demonstrated ability to detect AI voice clones, deepfake video calls, and synthetic identity fraud across 4 scenarios with ≥3 correct decisions.',
+        'criteria' => 'Complete 4 deepfake scenarios with ≥3 correct',
+        'skills'   => ['AI voice clone detection', 'Deepfake video recognition', 'CEO fraud resistance', 'Synthetic identity awareness'],
+    ],
+    [
         'key'      => 'cyber_champion',
         'title'    => 'Cyber Awareness Champion',
         'medal'    => '🏆',
         'color'    => '#b45309',
         'color_bg' => '#fffbeb',
-        'desc'     => 'The highest SafeSphere certification — awarded for demonstrating comprehensive cybersecurity awareness across all four threat domains.',
-        'criteria' => 'Earn all four specialist certificates',
-        'skills'   => ['Full-spectrum cyber threat awareness', 'Phishing & UPI fraud detection', 'Social engineering resistance', 'Network security hardening'],
+        'desc'     => 'The highest SafeSphere certification — awarded for demonstrating comprehensive cybersecurity awareness across all six core threat domains including AI deepfakes and SIM-swap attacks.',
+        'criteria' => 'Earn all six specialist certificates',
+        'skills'   => ['Full-spectrum cyber threat awareness', 'Phishing & domain spoofing detection', 'UPI & OTP fraud resistance', 'Social engineering & vishing defense', 'Network hardening & audit', 'Deepfake & AI synthetic threat recognition'],
     ],
 ];
 
@@ -95,8 +119,8 @@ foreach ($cert_defs as &$cd) {
 }
 unset($cd);
 
-$champDef = &$cert_defs[4];
-$champDef['check'] = ['ok' => $allFour, 'progress' => count($earned), 'total' => 4, 'pct' => round(count($earned)/4*100)];
+$champDef = &$cert_defs[6];
+$champDef['check'] = ['ok' => $allFour, 'progress' => count($earned), 'total' => 6, 'pct' => round(count($earned)/6*100)];
 if ($allFour) {
     $earned[] = 'cyber_champion';
     $exists = $pdo->prepare("SELECT id FROM certificates WHERE user_id=? AND cert_key='cyber_champion'");
