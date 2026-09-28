@@ -79,56 +79,7 @@ $cert_catalog = [
     ],
 ];
 
-// Fallback demo credentials (always work even on pristine database installs)
-$demo_credentials = [
-    'SS-A8E2B1C9F4' => [
-        'cert_key'      => 'phishing_specialist',
-        'title'         => 'Phishing & Domain Spoofing Defense Specialist',
-        'credential_id' => 'SS-A8E2B1C9F4',
-        'issue_date'    => date('Y-m-d', strtotime('-12 days')),
-        'user_name'     => 'Rehan Khan',
-        'user_email'    => 'rehan.khan@safesphere.org',
-        'cyber_score'   => 88
-    ],
-    'SS-7F3D9A1C5E' => [
-        'cert_key'      => 'upi_guardian',
-        'title'         => 'UPI Collect-Request & Reverse-Payment Defender',
-        'credential_id' => 'SS-7F3D9A1C5E',
-        'issue_date'    => date('Y-m-d', strtotime('-8 days')),
-        'user_name'     => 'Aarav Sharma',
-        'user_email'    => 'aarav.sharma@safesphere.org',
-        'cyber_score'   => 92
-    ],
-    'SS-CHAMP2026X' => [
-        'cert_key'      => 'cyber_champion',
-        'title'         => 'National Cyber Resilience & Defense Champion',
-        'credential_id' => 'SS-CHAMP2026X',
-        'issue_date'    => date('Y-m-d', strtotime('-2 days')),
-        'user_name'     => 'Priya Patel',
-        'user_email'    => 'priya.patel@safesphere.org',
-        'cyber_score'   => 97
-    ],
-    'SS-OTP98234D' => [
-        'cert_key'      => 'otp_defender',
-        'title'         => 'MFA (OTP) Hijacking & SIM-Swap Countermeasure Specialist',
-        'credential_id' => 'SS-OTP98234D',
-        'issue_date'    => date('Y-m-d', strtotime('-5 days')),
-        'user_name'     => 'Vikramaditya Mehta',
-        'user_email'    => 'v.mehta@safesphere.org',
-        'cyber_score'   => 86
-    ],
-    'SS-DF88123A' => [
-        'cert_key'      => 'deepfake_analyst',
-        'title'         => 'Synthetic Media & AI Voice-Clone Threat Specialist',
-        'credential_id' => 'SS-DF88123A',
-        'issue_date'    => date('Y-m-d', strtotime('-1 day')),
-        'user_name'     => 'Ananya Deshmukh',
-        'user_email'    => 'ananya.d@safesphere.org',
-        'cyber_score'   => 90
-    ]
-];
-
-// Perform Lookup
+// Perform Lookup directly against the database
 if ($cred_id) {
     try {
         $stmt = $pdo->prepare("SELECT c.*, u.name as user_name, u.email as user_email, u.cyber_score 
@@ -138,27 +89,22 @@ if ($cred_id) {
         $stmt->execute([$cred_id]);
         $cert = $stmt->fetch();
     } catch (Exception $e) {
-        // Fallback silently to memory lookup
-    }
-
-    if (!$cert && isset($demo_credentials[$cred_id])) {
-        $cert = $demo_credentials[$cred_id];
+        $cert = null;
     }
 }
 
-// Recent sample list for landing state
+// Recent real credentials list for landing state
 $recent_certs = [];
 try {
     $stmt = $pdo->query("SELECT c.credential_id, c.title, c.cert_key, c.issue_date, u.name as user_name 
                          FROM certificates c 
                          JOIN users u ON c.user_id = u.id 
-                         ORDER BY c.id DESC LIMIT 4");
+                         ORDER BY c.id DESC LIMIT 5");
     $recent_certs = $stmt->fetchAll();
-} catch (Exception $e) {}
-
-if (empty($recent_certs)) {
-    $recent_certs = array_values($demo_credentials);
+} catch (Exception $e) {
+    $recent_certs = [];
 }
+
 
 // Certificate enrichments if found
 $cert_details = null;
@@ -220,21 +166,10 @@ $nav_active = 'verify';
             </form>
 
             <div class="verify-demo-chips">
-                <span class="verify-demo-label">Quick Demo Verifications:</span>
-                <div class="verify-chips-flex">
-                    <button type="button" class="verify-chip" onclick="testCredential('SS-A8E2B1C9F4')">
-                        <span>🏅 Phishing Defense</span>
-                        <code>SS-A8E2B1C9F4</code>
-                    </button>
-                    <button type="button" class="verify-chip" onclick="testCredential('SS-7F3D9A1C5E')">
-                        <span>🛡️ UPI Guardian</span>
-                        <code>SS-7F3D9A1C5E</code>
-                    </button>
-                    <button type="button" class="verify-chip" onclick="testCredential('SS-CHAMP2026X')">
-                        <span>🏆 Cyber Champion</span>
-                        <code>SS-CHAMP2026X</code>
-                    </button>
-                </div>
+                <span class="verify-demo-label">Attestation Standard:</span>
+                <span style="font-size:12.5px;color:var(--text-muted);">
+                    All certificates are cryptographically indexed with format <code>SS-XXXXXXXXXX</code> (10-character hexadecimal).
+                </span>
             </div>
         </section>
 
@@ -414,8 +349,8 @@ $nav_active = 'verify';
                 </div>
 
                 <div class="flex gap-12 flex-center">
-                    <button type="button" class="btn btn-primary" onclick="testCredential('SS-A8E2B1C9F4')">Inspect Sample Credential (SS-A8E2B1C9F4)</button>
-                    <a href="verify.php" class="btn btn-outline">Clear &amp; Try Again</a>
+                    <a href="verify.php" class="btn btn-primary">Verify Another ID</a>
+                    <a href="dashboard.php" class="btn btn-outline">Training Dashboard →</a>
                 </div>
             </section>
 
@@ -460,39 +395,47 @@ $nav_active = 'verify';
                     <div class="flex-between mb-16 flex-wrap gap-12">
                         <div>
                             <h3 style="font-size:18px;font-weight:800;">Recent Verified Credentials in Registry</h3>
-                            <p class="text-xs text-muted" style="margin-top:2px;">Click any credential ID below to view its live cryptographic attestation certificate.</p>
+                            <p class="text-xs text-muted" style="margin-top:2px;">Live public attestations issued to SafeSphere candidates.</p>
                         </div>
                         <span class="badge badge-green">Live Registry</span>
                     </div>
 
-                    <div class="table-wrap">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Credential ID</th>
-                                    <th>Certification Title</th>
-                                    <th>Candidate Name</th>
-                                    <th>Date Attested</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <?php foreach ($recent_certs as $rc): ?>
-                                <tr>
-                                    <td><code class="font-mono font-bold" style="color:var(--indigo);"><?= e($rc['credential_id']) ?></code></td>
-                                    <td><strong><?= e($rc['title']) ?></strong></td>
-                                    <td><?= e($rc['user_name']) ?></td>
-                                    <td><?= date('d M Y', strtotime($rc['issue_date'])) ?></td>
-                                    <td>
-                                        <a href="verify.php?id=<?= e($rc['credential_id']) ?>" class="btn btn-outline btn-sm" style="font-size:12px;padding:4px 10px;">
-                                            Inspect Attestation →
-                                        </a>
-                                    </td>
-                                </tr>
-                                <?php endforeach; ?>
-                            </tbody>
-                        </table>
-                    </div>
+                    <?php if (empty($recent_certs)): ?>
+                        <div style="text-align:center;padding:32px 20px;color:var(--text-muted);font-size:14px;background:var(--bg);border-radius:var(--radius-sm);border:1px dashed var(--border);">
+                            <div style="font-size:24px;margin-bottom:8px;">🛡️</div>
+                            <div style="font-weight:700;margin-bottom:4px;color:var(--text);">No Public Certificates Issued Yet</div>
+                            <div>As trainees complete scenarios across the 8 defensive modules with passing scores, their verified certificates will appear here automatically.</div>
+                        </div>
+                    <?php else: ?>
+                        <div class="table-wrap">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Credential ID</th>
+                                        <th>Certification Title</th>
+                                        <th>Candidate Name</th>
+                                        <th>Date Attested</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php foreach ($recent_certs as $rc): ?>
+                                    <tr>
+                                        <td><code class="font-mono font-bold" style="color:var(--indigo);"><?= e($rc['credential_id']) ?></code></td>
+                                        <td><strong><?= e($rc['title']) ?></strong></td>
+                                        <td><?= e($rc['user_name']) ?></td>
+                                        <td><?= date('d M Y', strtotime($rc['issue_date'])) ?></td>
+                                        <td>
+                                            <a href="verify.php?id=<?= e($rc['credential_id']) ?>" class="btn btn-outline btn-sm" style="font-size:12px;padding:4px 10px;">
+                                                Inspect Attestation →
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    <?php endforeach; ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    <?php endif; ?>
                 </div>
 
                 <!-- Endorsement Notice -->

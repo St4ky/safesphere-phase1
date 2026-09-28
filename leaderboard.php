@@ -47,7 +47,7 @@ include __DIR__ . '/includes/header.php';
     </div>
 </div>
 
-<?php if ($user_rank <= 3): ?>
+<?php if ($user_rank <= 3 && $user['cyber_score'] > 40): ?>
 <div class="alert alert-success mb-24">
     You're on the podium! 🎉 Keep up the great work!
 </div>

@@ -54,8 +54,18 @@ foreach ($modules as $key => $m) {
     $stats[$key] = get_module_stats($user['id'], $key);
 }
 
+$pdo = get_db();
+$stmtC = $pdo->prepare("SELECT COUNT(*) FROM certificates WHERE user_id = ?");
+$stmtC->execute([$user['id']]);
+$certs_count = (int)$stmtC->fetchColumn();
+
+$total_attempted = array_sum(array_column($stats, 'attempted'));
+$total_correct   = array_sum(array_column($stats, 'correct'));
+$accuracy_pct    = $total_attempted > 0 ? round(($total_correct / $total_attempted) * 100) : 0;
+$total_scenarios = array_sum(array_column($modules, 'total'));
+
 // Recent activity: last 6 attempts across all modules
-$recent = get_db()->prepare(
+$recent = $pdo->prepare(
     "SELECT * FROM attempts WHERE user_id = ? ORDER BY created_at DESC LIMIT 6"
 );
 $recent->execute([$user['id']]);
@@ -77,6 +87,26 @@ include __DIR__ . '/includes/header.php';
     <?= e($welcome_flash) ?>
 </div>
 <?php endif; ?>
+
+<!-- Live User Performance Strip -->
+<div class="grid grid-4 mb-24" style="gap:14px;">
+    <div class="stat-card" style="padding:16px;">
+        <div class="stat-card-number" style="font-size:26px;"><?= $total_attempted ?>/<?= $total_scenarios ?></div>
+        <div class="stat-card-label">Scenarios Completed</div>
+    </div>
+    <div class="stat-card" style="padding:16px;">
+        <div class="stat-card-number" style="font-size:26px;color:<?= $accuracy_pct >= 70 ? 'var(--green)' : ($accuracy_pct >= 40 ? 'var(--amber)' : 'var(--text)') ?>;"><?= $accuracy_pct ?>%</div>
+        <div class="stat-card-label">Decision Accuracy</div>
+    </div>
+    <div class="stat-card" style="padding:16px;">
+        <div class="stat-card-number" style="font-size:26px;"><?= $certs_count ?>/7</div>
+        <div class="stat-card-label">Certificates Earned</div>
+    </div>
+    <div class="stat-card" style="padding:16px;">
+        <div class="stat-card-number" style="font-size:26px;color:var(--amber);">🔥 <?= (int)$user['streak_count'] ?></div>
+        <div class="stat-card-label">Day Training Streak</div>
+    </div>
+</div>
 
 <div class="dashboard-top-grid">
     <!-- Cyber Score Gauge Card -->

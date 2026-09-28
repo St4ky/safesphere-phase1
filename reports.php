@@ -10,28 +10,34 @@ function cert_progress_all($user_id, $pdo): array {
     $s_ph = get_module_stats($user_id, 'phishing');
     $s_up = get_module_stats($user_id, 'upi');
     $s_se = get_module_stats($user_id, 'socialeng');
+    $s_ot = get_module_stats($user_id, 'otp');
+    $s_df = get_module_stats($user_id, 'deepfake');
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM audit_results WHERE user_id=? AND status='pass'");
     $stmt->execute([$user_id]);
     $netPass = (int)$stmt->fetchColumn();
 
     return [
-        'phishing'  => ['ok' => $s_ph['attempted'] >= 9 && $s_ph['correct'] >= 7, 'val' => $s_ph['correct'], 'max' => 7],
-        'upi'       => ['ok' => $s_up['attempted'] >= 6 && $s_up['correct'] >= 5, 'val' => $s_up['correct'], 'max' => 5],
-        'socialeng' => ['ok' => $s_se['attempted'] >= 4 && $s_se['correct'] >= 3, 'val' => $s_se['correct'], 'max' => 3],
-        'network'   => ['ok' => $netPass >= 7, 'val' => $netPass, 'max' => 7],
+        'phishing_specialist' => ['ok' => $s_ph['attempted'] >= 9 && $s_ph['correct'] >= 7, 'val' => $s_ph['correct'], 'max' => 7],
+        'upi_guardian'        => ['ok' => $s_up['attempted'] >= 6 && $s_up['correct'] >= 5, 'val' => $s_up['correct'], 'max' => 5],
+        'social_eng_proof'    => ['ok' => $s_se['attempted'] >= 4 && $s_se['correct'] >= 3, 'val' => $s_se['correct'], 'max' => 3],
+        'network_defender'    => ['ok' => $netPass >= 7, 'val' => $netPass, 'max' => 7],
+        'otp_defender'        => ['ok' => $s_ot['attempted'] >= 5 && $s_ot['correct'] >= 4, 'val' => $s_ot['correct'], 'max' => 4],
+        'deepfake_analyst'    => ['ok' => $s_df['attempted'] >= 4 && $s_df['correct'] >= 3, 'val' => $s_df['correct'], 'max' => 3],
     ];
 }
 
 $cert_progress = cert_progress_all($user['id'], $pdo);
 $certs_earned  = array_filter($cert_progress, fn($c) => $c['ok']);
-$all_modules   = count($certs_earned) === 4;
+$all_modules   = count($certs_earned) === 6;
 
 // ── Module stats ───────────────────────────────────────────────────────────
 $modules = [
-    'phishing'  => ['label' => 'Phishing Defense',  'icon' => '📧', 'total' => 9],
-    'upi'       => ['label' => 'UPI Fraud Sim',      'icon' => '📱', 'total' => 6],
-    'socialeng' => ['label' => 'Social Engineering', 'icon' => '🗣️', 'total' => 4],
-    'network'   => ['label' => 'Network Self-Audit', 'icon' => '📶', 'total' => 7],
+    'phishing'  => ['label' => 'Phishing & Domain Spoofing', 'icon' => '📧', 'total' => 9],
+    'upi'       => ['label' => 'UPI Fraud & Payments',       'icon' => '📱', 'total' => 6],
+    'socialeng' => ['label' => 'Social Engineering & Vishing', 'icon' => '🗣️', 'total' => 4],
+    'network'   => ['label' => 'Network Hardening & Audit',  'icon' => '📶', 'total' => 7],
+    'otp'       => ['label' => 'OTP Hijacking & SIM-Swap',   'icon' => '📲', 'total' => 5],
+    'deepfake'  => ['label' => 'Deepfake & AI Voice Clone',  'icon' => '🤖', 'total' => 4],
 ];
 $modStats = [];
 foreach ($modules as $k => $m) { $modStats[$k] = get_module_stats($user['id'], $k); }
@@ -99,7 +105,7 @@ include __DIR__ . '/includes/header.php';
         <div class="stat-card-label">Overall Accuracy</div>
     </div>
     <div class="stat-card">
-        <div class="stat-card-number"><?= count($dbCerts) ?>/5</div>
+        <div class="stat-card-number"><?= count($dbCerts) ?>/7</div>
         <div class="stat-card-label">Certificates Earned</div>
     </div>
     <div class="stat-card">
@@ -163,6 +169,8 @@ include __DIR__ . '/includes/header.php';
         ['upi_guardian',        '🛡️', 'UPI Guardian',               'upi'],
         ['social_eng_proof',    '🗣️', 'Social Engineer Proof',       'socialeng'],
         ['network_defender',    '📶', 'Network Defender',            'network'],
+        ['otp_defender',        '📱', 'OTP & SIM-Swap Defender',     'otp'],
+        ['deepfake_analyst',    '🤖', 'Synthetic Media Analyst',      'deepfake'],
         ['cyber_champion',      '🏆', 'Cyber Awareness Champion',    null],
     ];
     foreach ($cert_defs as [$key, $medal, $title, $moduleKey]):

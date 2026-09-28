@@ -103,23 +103,23 @@ $nav_active = 'home';
 <!-- Live Stat Metrics Strip -->
 <div class="stat-strip stat-strip-5">
     <div class="stat-strip-item">
-        <div class="stat-number" data-counter="<?= max(120, $_live_stats['users']) ?>" data-suffix="+">0+</div>
+        <div class="stat-number" data-counter="<?= max(1, (int)$_live_stats['users']) ?>" data-suffix="<?= $_live_stats['users'] > 1 ? '+' : '' ?>">0</div>
         <div class="stat-label">Active Cyber Trainees</div>
     </div>
     <div class="stat-strip-item">
-        <div class="stat-number" data-counter="32" data-suffix="">0</div>
+        <div class="stat-number" data-counter="35" data-suffix="">0</div>
         <div class="stat-label">Interactive Lab Scenarios</div>
     </div>
     <div class="stat-strip-item">
-        <div class="stat-number" data-counter="94" data-suffix="%">0%</div>
-        <div class="stat-label">Phishing Detection Rate Post-Training</div>
+        <div class="stat-number" data-counter="8" data-suffix="">0</div>
+        <div class="stat-label">Specialized Threat Modules</div>
     </div>
     <div class="stat-strip-item">
         <div class="stat-number" data-counter="11333" data-suffix="Cr+">0</div>
         <div class="stat-label">₹ Lost to UPI Fraud in India (FY24)</div>
     </div>
     <div class="stat-strip-item">
-        <div class="stat-number" data-counter="<?= max(45, $_live_stats['certs']) ?>" data-suffix="">0</div>
+        <div class="stat-number" data-counter="<?= (int)$_live_stats['certs'] ?>" data-suffix="">0</div>
         <div class="stat-label">Verifiable Certificates Issued</div>
     </div>
 </div>
