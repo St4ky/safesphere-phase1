@@ -203,10 +203,10 @@ document.addEventListener('DOMContentLoaded', function() {
             badge.className = 'badge ' + (data.is_hosting_provider ? 'badge-amber' : 'badge-green');
             badge.textContent = data.is_hosting_provider ? 'Datacenter / VPN' : 'Consumer Broadband';
 
-            details.innerHTML = '<div><strong>Public IP:</strong> ' + data.ip + '</div>'
+            details.innerHTML = '<div><strong>Public IP:</strong> <code style="font-family:\'JetBrains Mono\',monospace;font-weight:700;">' + data.ip + '</code></div>'
                 + '<div><strong>ISP:</strong> ' + data.isp + '</div>'
                 + '<div><strong>Location:</strong> ' + data.city + ', ' + data.country + '</div>'
-                + '<div style="margin-top:6px;font-size:11.5px;color:var(--text-muted);">' + data.threat_assessment + '</div>';
+                + '<div style="margin-top:6px;font-size:11.5px;color:var(--text-muted);line-height:1.5;">' + data.threat_assessment + '</div>';
         })
         .catch(() => {
             details.textContent = 'Unable to reach IP intelligence API.';

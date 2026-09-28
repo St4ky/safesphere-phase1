@@ -442,7 +442,7 @@ include __DIR__ . '/includes/header.php';
                     
                     <div class="field">
                         <label>IP Address to Audit</label>
-                        <input type="text" id="ip-lookup-input" class="scanner-input" placeholder="e.g. 8.8.8.8 or leave empty for your current IP" value="8.8.8.8">
+                        <input type="text" id="ip-lookup-input" class="scanner-input" placeholder="e.g. 192.168.1.1, remote IP, or leave blank to audit your network" value="">
                     </div>
                     <div class="flex gap-10">
                         <button type="button" class="btn btn-primary" style="flex:1;" onclick="scanIPAddress()">Inspect IP Coordinates →</button>
@@ -603,37 +603,63 @@ function runIPScan(ip) {
     var card = document.getElementById('ip-result-card');
     var body = document.getElementById('ip-res-body');
     var badge = document.getElementById('ip-res-badge');
+    var input = document.getElementById('ip-lookup-input');
     card.style.display = 'block';
-    body.innerHTML = 'Querying IP Geo-Intelligence…';
+    body.innerHTML = '<div style="display:flex;align-items:center;gap:10px;color:var(--text-muted);"><span class="badge badge-indigo">Querying Carrier & Perimeter Geo-Intelligence…</span></div>';
 
     fetch('api/threat_intel.php?action=ip_lookup&ip=' + encodeURIComponent(ip))
     .then(r => r.json())
     .then(data => {
         if (!data.success) {
+            badge.className = 'badge badge-red';
+            badge.textContent = 'SCAN FAILED';
             body.innerHTML = '<div class="alert alert-error">' + (data.error || 'Failed to resolve IP.') + '</div>';
             return;
         }
 
+        if (input && data.ip) {
+            input.value = data.ip;
+        }
+
+        if (data.is_private_lan) {
+            badge.className = 'badge badge-indigo';
+            badge.textContent = 'INTERNAL LAN / ROUTER';
+            var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">'
+                + '<div><strong>Local Target:</strong> <code style="font-family:monospace;font-weight:700;">' + data.ip + '</code></div>'
+                + '<div><strong>Network Scope:</strong> ' + data.country + '</div>'
+                + '<div><strong>Subnet:</strong> ' + data.city + '</div>'
+                + '<div><strong>Interface:</strong> ' + data.isp + '</div>'
+                + '</div>';
+            html += '<div class="alert alert-info" style="font-size:13px;line-height:1.6;margin-bottom:14px;">'
+                + '<strong>Local Router Inspection:</strong> ' + data.threat_assessment
+                + '</div>';
+            html += '<button type="button" class="btn btn-outline btn-sm" onclick="scanMyIP()">Audit My External Public Internet IP Instead →</button>';
+            body.innerHTML = html;
+            return;
+        }
+
         badge.className = 'badge ' + (data.is_hosting_provider ? 'badge-amber' : 'badge-green');
-        badge.textContent = data.is_hosting_provider ? 'DATACENTER / VPN' : 'CONSUMER ISP';
+        badge.textContent = data.is_hosting_provider ? 'DATACENTER / VPN' : 'CONSUMER BROADBAND';
 
         var html = '<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">'
-            + '<div><strong>IP Address:</strong> ' + data.ip + '</div>'
-            + '<div><strong>Country:</strong> ' + data.country + ' (' + data.country_code + ')</div>'
-            + '<div><strong>City/Region:</strong> ' + data.city + ', ' + data.region + '</div>'
+            + '<div><strong>Audited Public IP:</strong> <code style="font-family:monospace;font-weight:700;">' + data.ip + '</code></div>'
+            + '<div><strong>Location:</strong> ' + data.city + ', ' + data.region + ', ' + data.country + ' (' + data.country_code + ')</div>'
             + '<div><strong>Internet Provider:</strong> ' + data.isp + '</div>'
-            + '<div><strong>AS Network:</strong> ' + data.as + '</div>'
-            + '<div><strong>Organization:</strong> ' + data.org + '</div>'
+            + '<div><strong>Organization:</strong> ' + (data.org || data.isp) + '</div>'
+            + '<div><strong>Autonomous System (ASN):</strong> ' + data.as + '</div>'
+            + '<div><strong>Perimeter Type:</strong> ' + (data.is_hosting_provider ? 'Datacenter / Proxy' : 'Residential / Cellular') + '</div>'
             + '</div>';
 
-        html += '<div class="alert ' + (data.is_hosting_provider ? 'alert-error' : 'alert-info') + '" style="font-size:13px;">'
-            + '<strong>Perimeter Assessment:</strong> ' + data.threat_assessment
+        html += '<div class="alert ' + (data.is_hosting_provider ? 'alert-error' : 'alert-info') + '" style="font-size:13px;line-height:1.6;">'
+            + '<strong>Perimeter Threat Assessment:</strong> ' + data.threat_assessment
             + '</div>';
 
         body.innerHTML = html;
     })
     .catch(() => {
-        body.innerHTML = '<div class="alert alert-error">Failed to query IP intelligence service.</div>';
+        badge.className = 'badge badge-red';
+        badge.textContent = 'OFFLINE';
+        body.innerHTML = '<div class="alert alert-error">Failed to query IP intelligence service. Please check your internet connection.</div>';
     });
 }
 

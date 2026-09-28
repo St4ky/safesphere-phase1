@@ -291,22 +291,62 @@ switch ($action) {
         exit;
 
     case 'ip_lookup':
-        $ip = trim($_GET['ip'] ?? $_POST['ip'] ?? '');
-        if (empty($ip)) {
-            $ip = $_SERVER['REMOTE_ADDR'] ?? '8.8.8.8';
-            if ($ip === '127.0.0.1' || $ip === '::1') {
-                $ip = '8.8.8.8';
+        $rawIp = trim($_GET['ip'] ?? $_POST['ip'] ?? '');
+        $isMyNetwork = empty($rawIp) || in_array(strtolower($rawIp), ['my', 'self', 'me', 'local'], true);
+
+        // 1. Check if user explicitly asked for private / loopback IP
+        $isPrivate = false;
+        $isLoopback = false;
+        if (!$isMyNetwork) {
+            if ($rawIp === '127.0.0.1' || $rawIp === '::1' || strtolower($rawIp) === 'localhost') {
+                $isLoopback = true;
+            } elseif (filter_var($rawIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false && filter_var($rawIp, FILTER_VALIDATE_IP)) {
+                $isPrivate = true;
             }
         }
 
-        $apiUrl = 'http://ip-api.com/json/' . urlencode($ip) . '?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query';
+        // If user explicitly queried a private or loopback IP, return a specialized LAN audit assessment
+        if ($isLoopback || $isPrivate) {
+            echo json_encode([
+                'success' => true,
+                'ip' => $rawIp,
+                'country' => 'Local Subnet',
+                'country_code' => 'LAN',
+                'city' => 'Internal Network',
+                'region' => 'Private Address Space',
+                'isp' => 'Internal LAN / Router Subnet',
+                'org' => 'Private Network (RFC 1918 Gateway)',
+                'as' => 'Unrouted Private Space',
+                'is_hosting_provider' => false,
+                'is_private_lan' => true,
+                'threat_assessment' => 'Internal LAN Address: This IP operates exclusively inside your local Wi-Fi or office network behind NAT (Network Address Translation). It cannot be probed directly from the public internet. Ensure your router admin password (e.g. at 192.168.1.1) is changed from the factory default.'
+            ]);
+            exit;
+        }
+
+        // 2. Lookup public IP or detect caller public IP without hardcoded fallbacks
+        $apiUrl = 'http://ip-api.com/json/';
+        if (!$isMyNetwork && filter_var($rawIp, FILTER_VALIDATE_IP)) {
+            $apiUrl .= urlencode($rawIp);
+        }
+        $apiUrl .= '?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query';
+
         $res = safe_curl_get($apiUrl);
         $data = $res ? json_decode($res, true) : null;
 
+        // Resilient fallback: if empty/local query returned an issue or if ip-api needed fallback
+        if ((!$data || ($data['status'] ?? '') !== 'success') && $isMyNetwork) {
+            $publicIp = safe_curl_get('https://api.ipify.org');
+            if ($publicIp && filter_var(trim($publicIp), FILTER_VALIDATE_IP)) {
+                $res2 = safe_curl_get('http://ip-api.com/json/' . trim($publicIp) . '?fields=status,message,country,countryCode,region,regionName,city,zip,lat,lon,timezone,isp,org,as,query');
+                $data = $res2 ? json_decode($res2, true) : null;
+            }
+        }
+
         if ($data && ($data['status'] ?? '') === 'success') {
             $isHosting = false;
-            $asDesc = strtolower($data['as'] ?? '' . ' ' . ($data['org'] ?? ''));
-            $hostingKeywords = ['amazon', 'aws', 'cloudflare', 'digitalocean', 'linode', 'ovh', 'hetzner', 'google llc', 'microsoft', 'azure', 'vultr', 'alibaba'];
+            $asDesc = strtolower(($data['as'] ?? '') . ' ' . ($data['org'] ?? ''));
+            $hostingKeywords = ['amazon', 'aws', 'cloudflare', 'digitalocean', 'linode', 'ovh', 'hetzner', 'google llc', 'microsoft', 'azure', 'vultr', 'alibaba', 'fastly', 'leaseweb'];
             foreach ($hostingKeywords as $hkw) {
                 if (strpos($asDesc, $hkw) !== false) {
                     $isHosting = true;
@@ -316,7 +356,7 @@ switch ($action) {
 
             echo json_encode([
                 'success' => true,
-                'ip' => $data['query'] ?? $ip,
+                'ip' => $data['query'] ?? $rawIp,
                 'country' => $data['country'] ?? 'Unknown',
                 'country_code' => $data['countryCode'] ?? '',
                 'city' => $data['city'] ?? 'Unknown',
@@ -325,15 +365,18 @@ switch ($action) {
                 'org' => $data['org'] ?? '',
                 'as' => $data['as'] ?? '',
                 'is_hosting_provider' => $isHosting,
-                'threat_assessment' => $isHosting ? 'Datacenter / Hosting / VPN relay detected. High risk if originating an unexpected banking or personal communication.' : 'Consumer / ISP allocation.'
+                'is_private_lan' => false,
+                'threat_assessment' => $isHosting
+                    ? 'Datacenter / Hosting / VPN relay detected. If you are not intentionally using a VPN, your traffic may be routed through an intermediate proxy.'
+                    : 'Consumer Broadband / Cellular ISP: Standard residential allocation. Ensure your Wi-Fi uses WPA2/WPA3 and router firmware is up to date.'
             ]);
             exit;
         }
 
         echo json_encode([
             'success' => false,
-            'error' => 'Unable to resolve IP intelligence at this time.',
-            'fallback_ip' => $ip
+            'error' => 'Unable to resolve network intelligence at this time. Please check your internet connection.',
+            'fallback_ip' => $rawIp
         ]);
         exit;
 
