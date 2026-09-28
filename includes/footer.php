@@ -12,6 +12,6 @@
     </div>
 </div>
 
-<script src="<?= $base ?>assets/js/main.js?v=2.8"></script>
+<script src="<?= $base ?>assets/js/main.js?v=2.9"></script>
 </body>
 </html>

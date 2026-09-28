@@ -122,6 +122,14 @@ h1, h2, h3, h4, p { margin: 0; }
     padding: 8px 10px 20px;
     font-weight: 800;
     font-size: 18px;
+    text-decoration: none;
+    color: var(--text);
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+.sidebar-logo:hover {
+    opacity: 0.85;
+    color: var(--text);
 }
 .sidebar-logo .dot {
     width: 30px; height: 30px; border-radius: 9px;

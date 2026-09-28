@@ -84,9 +84,15 @@ include __DIR__ . '/../includes/header.php';
                 <h3 style="font-size:18px;"><?= e($selected['title']) ?></h3>
                 <div class="text-sm text-muted">Category: <?= e($selected['threat_type']) ?></div>
             </div>
+            <?php if ($selected_attempt): ?>
             <span class="badge <?= $selected['is_scam'] ? 'badge-red' : 'badge-green' ?>">
                 <?= $selected['is_scam'] ? '⚠️ Fraudulent Scenario' : '🛡️ Authentic Notification' ?>
             </span>
+            <?php else: ?>
+            <span class="badge badge-indigo">
+                Active Simulation
+            </span>
+            <?php endif; ?>
         </div>
 
         <div class="feed-monitor mb-16">

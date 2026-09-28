@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $error = 'An account with this email already exists.';
             } else {
                 $hash = password_hash($password, PASSWORD_BCRYPT);
-                $stmt = $pdo->prepare("INSERT INTO users (name, email, password_hash, last_active_date) VALUES (?, ?, ?, ?)");
+                $stmt = $pdo->prepare("INSERT INTO users (name, email, password_hash, cyber_score, streak_count, last_active_date) VALUES (?, ?, ?, 40, 1, ?)");
                 $stmt->execute([$name, $email, $hash, date('Y-m-d')]);
                 $_SESSION['user_id'] = $pdo->lastInsertId();
                 $_SESSION['just_registered'] = true;
@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <title>Create Account · SafeSphere</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.8">
+<link rel="stylesheet" href="assets/css/style.css?v=2.9">
 </head>
 <body>
 <?php include __DIR__ . '/includes/public_nav.php'; ?>
@@ -87,6 +87,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <p class="text-sm text-center mt-8"><a href="index.php" style="color:var(--text-muted);">← Back to home</a></p>
     </div>
 </div>
-<script src="assets/js/main.js?v=2.8"></script>
+<script src="assets/js/main.js?v=2.9"></script>
 </body>
 </html>

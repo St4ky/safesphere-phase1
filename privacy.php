@@ -10,7 +10,7 @@ $nav_active = '';
 <title>Privacy Policy · SafeSphere</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.8">
+<link rel="stylesheet" href="assets/css/style.css?v=2.9">
 <script>try{var t=localStorage.getItem('ss_theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 </head>
 <body>
@@ -45,6 +45,6 @@ $nav_active = '';
 </div>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js?v=2.8"></script>
+<script src="assets/js/main.js?v=2.9"></script>
 </body>
 </html>

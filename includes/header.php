@@ -10,10 +10,12 @@ $base = $base ?? '';
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title><?= e($page_title ?? 'SafeSphere') ?> · SafeSphere Cyber Defense</title>
+<meta name="csrf_meta" content="<?= e(csrf_token()) ?>">
+<meta name="base-path" content="<?= $base ?>">
 <script>try{var t=localStorage.getItem('ss_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="<?= $base ?>assets/css/style.css?v=2.8">
+<link rel="stylesheet" href="<?= $base ?>assets/css/style.css?v=2.9">
 </head>
 <body>
 <!-- Mobile sidebar overlay backdrop -->
@@ -21,14 +23,14 @@ $base = $base ?? '';
 
 <div class="app-shell">
     <aside class="sidebar" id="app-sidebar">
-        <div class="sidebar-logo">
+        <a href="<?= $base ?>index.php" class="sidebar-logo" title="Back to SafeSphere Home">
             <span class="brand-badge" style="width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,#2563eb,#4f46e5);display:inline-flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 2px 8px rgba(37,99,235,0.35);flex-shrink:0;">
                 <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
                 </svg>
             </span>
             <span>SafeSphere</span>
-        </div>
+        </a>
 
         <div class="nav-section-label">Command Center</div>
         <a href="<?= $base ?>dashboard.php" class="nav-item <?= ($active ?? '') === 'dashboard' ? 'active' : '' ?>">

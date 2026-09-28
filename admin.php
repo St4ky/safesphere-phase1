@@ -170,7 +170,14 @@ include __DIR__ . '/includes/header.php';
     <div class="card card-pad">
         <h3 class="mb-16">📊 Module Accuracy</h3>
         <?php
-        $modLabels = ['phishing'=>'📧 Phishing','upi'=>'📱 UPI Fraud','socialeng'=>'🗣️ Social Eng','network'=>'📶 Network'];
+        $modLabels = [
+            'phishing'  => '📧 Phishing Defense',
+            'upi'       => '💳 UPI Fraud',
+            'socialeng' => '🗣️ Social Eng',
+            'network'   => '📶 Network Audit',
+            'otp'       => '📱 OTP & SIM-Swap',
+            'deepfake'  => '🤖 AI Deepfake'
+        ];
         foreach ($modLabels as $key => $label):
             $d = $accByMod[$key] ?? ['count'=>0,'correct'=>0,'acc'=>0];
         ?>

@@ -40,7 +40,23 @@ $modules = [
     'deepfake'  => ['label' => 'Deepfake & AI Voice Clone',  'icon' => '🤖', 'total' => 4],
 ];
 $modStats = [];
-foreach ($modules as $k => $m) { $modStats[$k] = get_module_stats($user['id'], $k); }
+foreach ($modules as $k => $m) {
+    if ($k === 'network') {
+        $st = $pdo->prepare("SELECT COUNT(*) FROM audit_results WHERE user_id=?");
+        $st->execute([$user['id']]);
+        $done = (int)$st->fetchColumn();
+        $st2 = $pdo->prepare("SELECT COUNT(*) FROM audit_results WHERE user_id=? AND status='pass'");
+        $st2->execute([$user['id']]);
+        $pass = (int)$st2->fetchColumn();
+        $modStats['network'] = [
+            'attempted'    => $done,
+            'correct'      => $pass,
+            'total_points' => $pass * 3
+        ];
+    } else {
+        $modStats[$k] = get_module_stats($user['id'], $k);
+    }
+}
 $totalAttempted = array_sum(array_column($modStats, 'attempted'));
 $totalCorrect   = array_sum(array_column($modStats, 'correct'));
 

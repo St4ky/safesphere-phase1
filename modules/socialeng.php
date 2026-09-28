@@ -153,41 +153,14 @@ include __DIR__ . '/../includes/header.php';
         </form>
 
         <script>
-        // Inject scenario data for the JS chat engine
+        // Inject scenario data and flag that dedicated engine is active
+        window._SE_CUSTOM_ENGINE = true;
         window.SE_DATA = {
             nodes: <?= json_encode($selected['nodes'], JSON_UNESCAPED_UNICODE) ?>,
             currentNode: 'start'
         };
-        // Override terminal-node handler to submit outcome form
-        document.addEventListener('DOMContentLoaded', function() {
-            const origRender = window._seRenderChoices;
-            const chatChoices = document.getElementById('chat-choices');
-            const chatMessages = document.getElementById('chat-messages');
-            // Patch: when terminal node rendered, auto-submit outcome
-            const observer = new MutationObserver(function() {
-                const nodes = window.SE_DATA && window.SE_DATA.nodes;
-                if (!nodes) return;
-                // Check if current displayed node is terminal
-                const btns = chatChoices.querySelectorAll('.choice-btn');
-                const primaryBtn = chatChoices.querySelector('.btn-primary');
-                if (primaryBtn && btns.length === 0) {
-                    // Terminal — determine outcome from last outcome bubble class
-                    const passEl = chatMessages.querySelector('.bubble-outcome-pass');
-                    const failEl = chatMessages.querySelector('.bubble-outcome-fail');
-                    const outcomeVal = document.getElementById('outcome-value');
-                    if (outcomeVal && !outcomeVal.value) {
-                        outcomeVal.value = passEl ? 'pass' : 'fail';
-                        document.getElementById('outcome-form').submit();
-                    }
-                }
-            });
-            if (chatChoices) observer.observe(chatChoices, { childList: true, subtree: true });
 
-            // Patch appendBubble to use outcome bubble classes for terminal messages
-            const origInitChat = window.initChat;
-        });
-
-        // Extend the chat engine to handle terminal outcomes with color-coded bubbles
+        // Dedicated branching chat engine with realistic delays and automatic outcome recording
         document.addEventListener('DOMContentLoaded', function() {
             const chatMessages = document.getElementById('chat-messages');
             const chatChoices  = document.getElementById('chat-choices');

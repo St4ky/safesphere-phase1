@@ -9,7 +9,7 @@
 <meta name="description" content="Explore the 8 defensive simulation modules in SafeSphere: Email Phishing, UPI Fraud, Social Engineering, Network Hardening, OTP Hijacking, Deepfakes, Forensics, and Credential Attestation.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=2.8">
+<link rel="stylesheet" href="assets/css/style.css?v=2.9">
 </head>
 <body>
 <?php include __DIR__ . '/includes/public_nav.php'; ?>
@@ -475,6 +475,6 @@
 </section>
 
 <?php include __DIR__ . '/includes/public_footer.php'; ?>
-<script src="assets/js/main.js?v=2.8"></script>
+<script src="assets/js/main.js?v=2.9"></script>
 </body>
 </html>

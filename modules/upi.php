@@ -103,7 +103,7 @@ include __DIR__ . '/../includes/header.php';
                 </div>
                 <div class="phone-body">
                     <div class="phone-collect-label">💸 Collect Request</div>
-                    <div class="phone-amount-display <?= !$selected['is_fraud'] ? 'legit' : '' ?>"><?= e($selected['amount']) ?></div>
+                    <div class="phone-amount-display <?= ($selected_attempt && !$selected['is_fraud']) ? 'legit' : '' ?>"><?= e($selected['amount']) ?></div>
                     <div class="phone-from">from <strong><?= e($selected['sender_name']) ?></strong></div>
                     <?php if ($selected['urgency'] === 'high'): ?>
                     <div class="phone-urgency">⚠️ Action required — time sensitive</div>

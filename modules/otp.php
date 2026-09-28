@@ -86,9 +86,15 @@ include __DIR__ . '/../includes/header.php';
                 <h3 style="font-size:18px;"><?= e($selected['caller_name']) ?></h3>
                 <div class="text-sm font-mono text-muted"><?= e($selected['caller_id']) ?> &middot; <?= e($selected['time']) ?></div>
             </div>
+            <?php if ($selected_attempt): ?>
             <div class="badge <?= $selected['is_scam'] ? 'badge-red' : 'badge-green' ?>" style="font-size:12px;">
                 <?= $selected['is_scam'] ? '⚠️ Threat Vector' : '🛡️ Legitimate Flow' ?>
             </div>
+            <?php else: ?>
+            <div class="badge badge-indigo" style="font-size:12px;">
+                Active Simulation
+            </div>
+            <?php endif; ?>
         </div>
 
         <!-- Phone Audio/Dialogue Box -->

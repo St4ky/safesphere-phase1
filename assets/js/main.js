@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const chatChoices = document.getElementById('chat-choices');
     const chatData = window.SE_DATA || null; // injected by PHP
 
-    if (chatWindow && chatData) {
+    if (chatWindow && chatData && !window._SE_CUSTOM_ENGINE) {
         initChat(chatData.currentNode || 'start');
     }
 
@@ -301,7 +301,8 @@ document.addEventListener('DOMContentLoaded', function () {
             quickScanResult.style.display = 'block';
             quickScanResult.innerHTML = '<div style="display:flex;align-items:center;gap:10px;color:var(--text-muted);"><span class="badge badge-indigo">Querying Cloudflare DoH & Threat Heuristics…</span></div>';
 
-            fetch('api/threat_intel.php?action=quick_scan', {
+            var basePath = document.querySelector('meta[name="base-path"]')?.content || (window.location.pathname.indexOf('/modules/') !== -1 ? '../' : '');
+            fetch(basePath + 'api/threat_intel.php?action=quick_scan', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
                 body: 'input=' + encodeURIComponent(val)
