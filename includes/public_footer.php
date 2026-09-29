@@ -6,9 +6,9 @@
         <div class="footer-grid">
             <!-- Brand -->
             <div class="footer-brand-col">
-                <div class="logo-wrap">
-                    <div class="dot">◆</div>
-                    SafeSphere
+                <div class="logo-wrap" style="display:flex;align-items:center;gap:10px;">
+                    <img src="assets/images/logo.png" alt="SafeSphere" style="width:40px;height:40px;object-fit:contain;border-radius:6px;">
+                    <span style="font-size:18px;font-weight:800;">SafeSphere</span>
                 </div>
                 <div class="footer-tagline">India's hands-on cyber awareness platform — train against real phishing, UPI fraud, and social engineering scenarios.</div>
                 <div class="footer-badge">🇮🇳 Built for Indian Internet Users</div>
